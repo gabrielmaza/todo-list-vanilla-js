@@ -18,6 +18,10 @@ let tasks = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("tasks")) {
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+  }
+
   printTasks();
 });
 
@@ -54,6 +58,8 @@ const setTasks = (e) => {
 };
 
 const printTasks = () => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
   if (Object.values(tasks).length === 0) {
     taskList.innerHTML = `
         <div class="alert alert-dark text-center">
